@@ -1,0 +1,33 @@
+---
+
+import { getCollection } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/PageHeader.astro";
+
+
+  const pages = await getCollection("pages" );
+	const page = pages[0];
+
+const { title, meta_title, description, image } = page ? page.data : {title: "Page not found", meta_title: "Page not found", description: "Page not found", image: "Page not found"};
+const { Content } = await page?.render() ?? { Content: "<></>" };
+---
+
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  image={image}
+>
+  <PageHeader title={title} />
+  <section class="section-sm">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-10">
+          <div class="content">
+            <Content />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

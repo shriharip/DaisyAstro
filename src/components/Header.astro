@@ -1,0 +1,148 @@
+---
+
+import config from "@/config/config.json";
+import menu from "@/config/menu.json";
+
+export interface ChildNavigationLink {
+  name: string;
+  url: string;
+}
+
+export interface NavigationLink {
+  name: string;
+  url: string;
+  hasChildren?: boolean;
+  children?: ChildNavigationLink[];
+}
+
+const { main }: { main: NavigationLink[] } = menu;
+const { navigation_button, settings } = config;
+const { pathname } = Astro.url;
+---
+
+<header class={`z-30 ${settings.sticky_header && "sticky top-0"}`}>
+  <nav class="navbar bg-base-100">
+		<div class="navbar bg-base-100">
+			<div class="navbar-start">
+				<div class="dropdown">
+					<label tabindex="0" class="btn btn-ghost lg:hidden">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+					</label>
+					<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+{ 
+	main.map((menu) => (
+		<>
+			{menu.hasChildren ? (
+				<li>
+					<span
+						class={` ${
+							menu.children?.map(({ url }) => url).includes(pathname) ||
+							menu.children
+								?.map(({ url }) => `${url}/`)
+								.includes(pathname)
+								? "active"
+								: ""
+						}`}
+					>
+						{menu.name}
+						<svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+							<path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+						</svg>
+					</span>
+					<ul class="p-2">
+						{menu.children?.map((child) => (
+							<li>
+								<a
+									href={child.url}
+									class={`${
+										(pathname === `${child.url}/` ||
+											pathname === child.url) &&
+										"active"
+									}`}
+								>
+									{child.name}
+								</a>
+							</li>
+						))}
+					</ul>
+				</li>
+			) : (
+				<li>
+					<a
+						href={menu.url}
+						class={`${
+							(pathname === `${menu.url}/` || pathname === menu.url) &&
+							"active"
+						}`}
+					>
+						{menu.name}
+					</a>
+				</li>
+			)}
+		</>
+	))	}
+					</ul>
+				</div>
+				<a class="btn btn-ghost text-xl">daisyUI</a>
+			</div>
+			<div class="navbar-center hidden lg:flex">
+				<ul class="menu menu-horizontal px-1">
+					{ 
+						main.map((menu) => (
+							<>
+								{menu.hasChildren ? (
+									<li tabindex="0">
+										<details>
+											<summary class={` ${
+												menu.children?.map(({ url }) => url).includes(pathname) ||
+												menu.children
+													?.map(({ url }) => `${url}/`)
+													.includes(pathname)
+													? "active"
+													: ""
+											}`}>{menu.name}</summary>
+					
+										<ul class="p-2">
+											{menu.children?.map((child) => (
+												<li>
+													<a class={`${
+													(pathname === `${child.url}/` ||
+														pathname === child.url) &&
+													"active"
+												}`}
+											 href={child.url}>
+														{child.name}
+													</a>
+												</li>
+											))}
+										</ul>
+									</details>
+									</li>
+								) : (
+									<li>
+										<a class={`${
+										(pathname === `${menu.url}/` || pathname === menu.url) &&
+										"active"
+									}`}
+											href={menu.url}>
+											{menu.name}
+										</a>
+									</li>
+								)}
+							</>
+						))	}
+										</ul>
+									</div>
+									<!-- navbar end button -->
+			<div class="navbar-end">
+				{
+					navigation_button.enable && (
+						<a href={navigation_button.link} class="btn">
+							{navigation_button.label}
+						</a>
+					)
+				}
+			</div>
+		</div>	
+	</nav>
+</header>

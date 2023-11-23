@@ -1,0 +1,38 @@
+{
+  "name": "astro-daisy-lucia",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.3.1",
+    "@astrojs/mdx": "^1.1.5",
+    "@astrojs/rss": "^3.0.0",
+    "@astrojs/sitemap": "^3.0.3",
+    "@astrojs/tailwind": "^5.0.2",
+    "@fontsource-variable/anek-kannada": "^5.0.15",
+    "astro": "^3.5.6",
+    "canvas-confetti": "^1.6.0",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.3.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/canvas-confetti": "^1.6.0",
+    "autoprefixer": "^10.4.15",
+    "daisyui": "^4.4.2",
+    "eslint": "^8.54.0",
+    "postcss": "^8.4.28",
+    "prettier": "^3.1.0",
+    "prettier-plugin-astro": "^0.12.2",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "sass": "^1.69.5",
+    "tailwind-bootstrap-grid": "^5.0.1"
+  }
+}
