@@ -2,13 +2,13 @@
 import Base from "@/layouts/Base.astro";
 import Hero from "@/components/Hero.astro";
 // import CallToAction from "@/components/CallToAction.astro";
-// import Testimonial from "@/components/Testimonial.astro";
+import Testimonials from "@/components/Testimonials.astro";
 import { getEntry, type CollectionEntry } from "astro:content";
 
 const hero: CollectionEntry<"hero"> = await getEntry("hero", "hero");
 console.log(hero.data);
  const features: CollectionEntry<"features"> = await getEntry("features", "features");
-// const testimonial: CollectionEntry<"sections"> = await getEntry("sections", "testimonials");
+const testimonials: CollectionEntry<"testimonials"> = await getEntry("testimonials", "testimonials");
 // const call_to_action: CollectionEntry<"sections"> = await getEntry("sections", "call-to-action");
 ---
 
@@ -55,6 +55,6 @@ console.log(hero.data);
     ))
   }
 
-  <!-- <Testimonial testimonial={testimonial} />
-  <CallToAction call_to_action={call_to_action} /> -->
+   <Testimonials testimonials={testimonials} />
+
 </Base>

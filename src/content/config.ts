@@ -67,19 +67,23 @@ const featuresCollection = defineCollection({
 });
 
 const testimonialsCollection = defineCollection({
-	schema: z.object({
-		title: z.string(),
-		enable: z.boolean(),
-		content: z.string().optional(),
-		testimonials: z.array(z.object({
-			name: z.string().optional(),
-			designation: z.string().optional(),
-			avatar: z.string().optional(),
-			content: z.string().optional(),
-		})).optional()
-
-	}),
-// const sectionsCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    enable: z.boolean(),
+    content: z.string().optional(),
+    values: z
+      .array(
+        z.object({
+          name: z.string().optional(),
+          designation: z.string().optional(),
+          avatar: z.string().optional(),
+          content: z.string().optional(),
+        }),
+      )
+      .optional(),
+  }),
+});
+	// const sectionsCollection = defineCollection({
 // 	schema: z.array(z.object({
 // 		title: z.string(),
 // 		content: z.string().optional().or(z.array(z.string().optional()).optional()),
